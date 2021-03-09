@@ -1,4 +1,10 @@
-# test2
+---
+- ingredient: tomate
+  qty: 2
+- ingredient: ail
+  qty: 1 gousse
+...
 
-test2.md
+# 2eme recette
 
+procédure

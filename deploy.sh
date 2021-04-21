@@ -16,10 +16,7 @@ git init
 git add -A
 git commit -m 'deploy'
 
-# if you are deploying to https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
-
-# if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:maldestor95/lisy.git master:gh-pages
+git remote add origin https://github.com/maldestor95/lisy.git
+git push -f origin master:gh-pages
 
 cd -

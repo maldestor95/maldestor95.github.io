@@ -1,4 +1,5 @@
 # lisy
+<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -27,3 +28,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+test compile vuejs app
+>>>>>>> 760a728d93627c643faf2be70bb231ac5fdcc677

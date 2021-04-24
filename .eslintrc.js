@@ -20,4 +20,9 @@ module.exports = {
   ],
   rules: {
   },
+  'eslint.validate': [
+    'javascript',
+    'vue',
+  ],
+
 };

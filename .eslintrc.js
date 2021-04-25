@@ -19,10 +19,10 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'linebreak-style': 'off',
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never',
+    }],
   },
-  'eslint.validate': [
-    'javascript',
-    'vue',
-  ],
-
 };

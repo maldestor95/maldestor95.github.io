@@ -1,4 +1,4 @@
-# lisy
+# Personal page https://maldestor95.github.io/
 
 Template repository for static vuejs app
 ## Project setup

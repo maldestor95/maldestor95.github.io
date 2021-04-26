@@ -62,9 +62,10 @@ export default {
         text: 'awesome-vuetify',
         href: 'https://github.com/vuetifyjs/awesome-vuetify',
       },
-      { text: 'vuejs',
-        href: ''
-      }
+      {
+        text: 'Official vuejs',
+        href: 'https://vuejs.org/',
+      },
     ],
   }),
 };

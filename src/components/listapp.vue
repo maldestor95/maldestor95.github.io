@@ -40,12 +40,7 @@
               {{ eco.text }}
             </a>
             {{ eco.desc }}
-          <a
-            :href="eco.github"
-            class="subheading mx-3"
-            target="_blank">
-              gitHub
-            </a>
+              <v-icon @click="githubclick(eco.github) ">mdi-github</v-icon>
           </div>
         </v-row>
       </v-col>
@@ -67,5 +62,10 @@ export default {
       },
     ],
   }),
+  methods: {
+    githubclick(link) {
+      window.location.replace(link);
+    },
+  },
 };
 </script>

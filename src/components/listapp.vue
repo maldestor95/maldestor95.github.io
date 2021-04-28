@@ -3,10 +3,10 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+           :src="require('../../public/noun_cogs_170064.svg')"
           class="my-3"
           contain
-          height="200"
+          height="400"
         />
       </v-col>
 
@@ -16,8 +16,8 @@
         </h1>
 
         <p class="subheading font-weight-regular">
-          Cette page est a ses débuts et sert de table de matières aux différentes applications
-          que je vais expérimenter
+          Cette page est à ses débuts et sert de table de matières aux différentes applications
+          que je vais expérimenter sur gihub et VueJs
         </p>
       </v-col>
       <v-col

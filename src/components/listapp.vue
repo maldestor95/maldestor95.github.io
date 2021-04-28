@@ -3,21 +3,21 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+           :src="require('../../public/noun_cogs_170064.svg')"
           class="my-3"
           contain
-          height="200"
+          height="400"
         />
       </v-col>
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to LISY
+         Bienvenue sur la page de Maldestor95
         </h1>
 
         <p class="subheading font-weight-regular">
-          This is a template vuejs site for maldestor95 github pages.
-          Anyway, feel free to fork it.
+          Cette page est à ses débuts et sert de table de matières aux différentes applications
+          que je vais expérimenter sur gihub et VueJs
         </p>
       </v-col>
       <v-col
@@ -25,19 +25,23 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
+          Pages
         </h2>
 
         <v-row justify="center">
-          <a
+          <div
             v-for="(eco, i) in ecosystem"
             :key="i"
+          >
+            <a
             :href="eco.href"
             class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
+            target="_blank">
+              {{ eco.text }}
+            </a>
+            {{ eco.desc }}
+              <v-icon @click="githubclick(eco.github) ">mdi-github</v-icon>
+          </div>
         </v-row>
       </v-col>
     </v-row>
@@ -51,22 +55,17 @@ export default {
   data: () => ({
     ecosystem: [
       {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader',
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify',
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      },
-      {
-        text: 'Official vuejs',
-        href: 'https://vuejs.org/',
+        text: 'LISY',
+        desc: 'VueJs template for personal github pages ',
+        href: 'https://maldestor95.github.io/lisy',
+        github: 'https://github.com/maldestor95/lisy',
       },
     ],
   }),
+  methods: {
+    githubclick(link) {
+      window.location.replace(link);
+    },
+  },
 };
 </script>

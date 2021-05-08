@@ -8,27 +8,25 @@
 
     <v-main>
         <listApp />
-        <recette />
-        <recettelist/>
+        <v-text-field v-model='testpath.link'></v-text-field>
+        <recetteApp/>
     </v-main>
 </v-app>
 </template>
 
 <script>
 import listApp from './components/listapp.vue';
-import recette from './features/recette/recette.vue';
-import recettelist from './features/recette/recettelists.vue';
+import recetteApp from './features/recette/recettepage.vue';
 
 export default {
   name: 'App',
   components: {
     listApp,
-    recette,
-    recettelist,
+    recetteApp,
   },
 
   data: () => ({
-    //
+    testpath: { link: 'readme.md' },
   }),
 };
 </script>

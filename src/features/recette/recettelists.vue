@@ -8,6 +8,7 @@
 
 <script>
 import yaml from 'js-yaml';
+import constants from './constants';
 
 export default {
   props: {
@@ -28,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    const url = 'recettes/recettelist.md';
+    const url = `${constants.RecipePath}/recettelist.md`;
     const myHeaders = new Headers();
     const myInit = {
       method: 'GET',

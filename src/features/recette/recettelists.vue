@@ -1,8 +1,16 @@
 <template>
     <div>
-        <div v-for="recette in recetteslistfiltered" :key="recette.id">
+      <v-text-field box label="Recette" v-model="searchRecipe"
+      name="searchRecipe"
+      clearable
+      autocomplete="off"
+      >
+      </v-text-field>
+      <ul class="recetteList">
+        <li v-for="recette in recetteslistfiltered" :key="recette.id">
             <a @click="selectRecipe(recette)">{{ recette.title }}</a>
-        </div>
+        </li>
+      </ul>
     </div>
 </template>
 
@@ -18,7 +26,7 @@ export default {
     },
     maxResponseNumber: {
       type: Number,
-      default: 10,
+      default: 100,
     },
   },
   data() {
@@ -26,6 +34,7 @@ export default {
       recetteslist: 'string',
       chosenRecipe: this.value,
       recipeName: null,
+      searchRecipe: '',
     };
   },
   mounted() {
@@ -54,12 +63,12 @@ export default {
     recetteslistfiltered() {
       const maxListLength = this.maxResponseNumber;
       // eslint-disable-next-line no-console
-      console.log(this.value);
-      if (this.value === '' || this.value === null) return this.recetteslist.slice(0, maxListLength);
+      console.log(this.searchRecipe);
+      if (this.searchRecipe === '' || this.searchRecipe === null) return this.recetteslist.slice(0, maxListLength);
 
-      let convertRecipNameToFilter = this.value[0].toUpperCase();
-      for (let index = 1; index < this.value.length; index += 1) {
-        convertRecipNameToFilter += `(.*)${this.value[index].toUpperCase()}`;
+      let convertRecipNameToFilter = this.searchRecipe[0].toUpperCase();
+      for (let index = 1; index < this.searchRecipe.length; index += 1) {
+        convertRecipNameToFilter += `(.*)${this.searchRecipe[index].toUpperCase()}`;
       }
       const regexFilter = new RegExp(convertRecipNameToFilter);
 
@@ -73,4 +82,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.recetteList {
+  height: 200px;
+  overflow-y: auto;
+}
 </style>

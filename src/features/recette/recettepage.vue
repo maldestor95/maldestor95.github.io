@@ -1,5 +1,6 @@
 <template>
     <div>
+      <v-icon @click="opengithub()">mdi-github</v-icon>
         <recettelist @choice='changeRecipe($event)'/>
         <recette v-model='recipeModel'/>
     </div>
@@ -9,6 +10,7 @@
 import marked from 'marked';
 import yaml from 'js-yaml';
 import constants from './constants';
+// import github from '../../components/github.vue';
 import recette from './recette.vue';
 import recettelist from './recettelists.vue';
 
@@ -16,6 +18,7 @@ export default {
   components: {
     recette,
     recettelist,
+    // github,
   },
   data() {
     return {
@@ -51,6 +54,9 @@ export default {
           localThis.recipeModel.ingredients = yaml.load(result.substring(0, endYamlPosition + 3));
           localThis.recipeModel.recipe = marked(result.substring(endYamlPosition + 3));
         });
+    },
+    opengithub() {
+      window.open('https://github.com/maldestor95/recipebook', '_blank');
     },
   },
 };

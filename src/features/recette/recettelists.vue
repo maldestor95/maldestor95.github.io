@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-text-field box label="Recette" v-model="searchRecipe"
+      <v-text-field filled label="Recette" v-model="searchRecipe"
       name="searchRecipe"
       clearable
       autocomplete="off"

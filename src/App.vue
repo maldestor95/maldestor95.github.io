@@ -4,29 +4,36 @@
         <div class="d-flex align-center">
             Maldestor95
         </div>
+        <v-spacer></v-spacer>
+        <mainMenu v-model='menulist' @choice="menu=$event"/>
     </v-app-bar>
 
     <v-main>
-        <listApp />
-        <v-text-field v-model='testpath.link'></v-text-field>
-        <recetteApp/>
+        <listApp v-if="menu==='home'"/>
+        <recetteApp v-if="menu==='recette'"/>
     </v-main>
 </v-app>
 </template>
 
 <script>
+import mainMenu from './components/menu.vue';
 import listApp from './components/listapp.vue';
 import recetteApp from './features/recette/recettepage.vue';
 
 export default {
   name: 'App',
   components: {
+    mainMenu,
     listApp,
     recetteApp,
   },
 
   data: () => ({
-    testpath: { link: 'readme.md' },
+    menu: 'home',
+    menulist: [
+      { title: 'home' },
+      { title: 'recette' },
+    ],
   }),
 };
 </script>

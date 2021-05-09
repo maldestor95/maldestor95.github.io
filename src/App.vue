@@ -11,6 +11,7 @@
     <v-main>
         <listApp v-if="menu==='home'"/>
         <recetteApp v-if="menu==='recette'"/>
+        <devWiki v-if="menu==='dev Wiki'"/>
     </v-main>
 </v-app>
 </template>
@@ -19,6 +20,7 @@
 import mainMenu from './components/menu.vue';
 import listApp from './components/listapp.vue';
 import recetteApp from './features/recette/recettepage.vue';
+import devWiki from './features/devwiki/devwiki.vue';
 
 export default {
   name: 'App',
@@ -26,6 +28,7 @@ export default {
     mainMenu,
     listApp,
     recetteApp,
+    devWiki,
   },
 
   data: () => ({
@@ -33,6 +36,7 @@ export default {
     menulist: [
       { title: 'home' },
       { title: 'recette' },
+      { title: 'dev Wiki' },
     ],
   }),
 };

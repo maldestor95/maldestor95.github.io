@@ -1,4 +1,4 @@
-import User from './scorelib';
+import User from './scoreuser';
 
 test('should test User ', () => {
   const testU = new User('Ludo');

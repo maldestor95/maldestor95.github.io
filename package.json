@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "vue-cli-service build & deploy.bat"
+    "deploy": "vue-cli-service build & deploy.bat",
+    "test": "jest"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -23,7 +24,9 @@
     "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-vue": "^7.9.0",
+    "jest": "^26.6.3",
     "sass": "^1.32.0",
     "sass-loader": "^10.0.0",
     "vue-cli-plugin-vuetify": "^2.3.1",
@@ -48,5 +51,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "jest": {
+    "testMatch": [
+      "**/src/**/*.test.js"
+    ]
+  }
 }

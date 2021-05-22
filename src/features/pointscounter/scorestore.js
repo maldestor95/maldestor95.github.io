@@ -23,17 +23,35 @@ class ScoreStore {
   }
 
   player(name) {
-    // console.log(this.store[0].name, name);
     const result = this.store.filter((pl) => pl.name === name);
-    // console.log(result);
     return result[0];
   }
 
-  /* addRound(roundScore) { // roundScore example [{'name1':'score'},{'name2':'score2'}]
+  addRound(roundScore) { // roundScore example [{'name1':'score'},{'name2':'score2'}]
     if (roundScore.length !== this.playerList.length) return null;
-    roundScore.map(((rs) => {
-      const player = this.store;
-    }));
-  } */
+    for (let playerid = 0; playerid < roundScore.length; playerid += 1) {
+      const element = roundScore[playerid];
+      this.store[playerid].addRound(element);
+    }
+    return false;
+  }
+
+  deleteRound(roundNumber) { // roundScore example [{'name1':'score'},{'name2':'score2'}]
+    if (roundNumber > this.store[0].score.length) return null;
+    for (let playerid = 0; playerid < this.store.length; playerid += 1) {
+      this.store[playerid].deleteRound(roundNumber);
+    }
+    return false;
+  }
+
+  editRound(roundNumber, roundScore) { // roundScore example [{'name1':'score'},{'name2':'score2'}]
+    if (roundScore.length !== this.playerList.length) return null;
+    if (roundNumber > this.store[0].score.length) return null;
+    for (let playerid = 0; playerid < roundScore.length; playerid += 1) {
+      const element = roundScore[playerid];
+      this.store[playerid].editRound(roundNumber, element);
+    }
+    return false;
+  }
 }
 module.exports = ScoreStore;

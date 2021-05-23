@@ -28,7 +28,7 @@ class User {
     this.score = [...this.score, score];
   }
 
-  cumul() {
+  get cumul() {
     return this.score.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
   }
 }

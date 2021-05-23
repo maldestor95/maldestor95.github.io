@@ -22,6 +22,17 @@ class ScoreStore {
     return this.store.map((player) => player.name);
   }
 
+  get cumulScores() {
+    const cumul = this.store.map((player) => {
+      const r = {};
+      // r.name = player.name;
+      // const cumul = player.cumul[player.cumul.length - 1];
+      r[player.name] = player.cumul[player.cumul.length - 1];
+      return r;
+    });
+    return cumul;
+  }
+
   player(name) {
     const result = this.store.filter((pl) => pl.name === name);
     return result[0];

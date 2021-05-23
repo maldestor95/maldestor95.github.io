@@ -46,4 +46,12 @@ describe('ScoreStore', () => {
     Scores.editRound(2, [200, 201, 202]);
     expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2, 200, 4] });
   });
+  test('get cumulative Score', () => {
+    const Scores = new ScoreStore(['alpha 1', 'beta 1']);
+    Scores.addRound([1, 10]);
+    Scores.addRound([2, 11]);
+    Scores.addRound([3, 12]);
+    Scores.addRound([4, 13]);
+    expect(Scores.cumulScores).toEqual([{ 'alpha 1': 10 }, { 'beta 1': 46 }]);
+  });
 });

@@ -11,7 +11,7 @@ test('should test User ', () => {
   expect(testU.round(10)).toBe(null); // null
   testU.editRound(1, 0);
   expect(testU).toEqual({ name: 'Ludo', score: [5, 0, 15] });
-  expect(testU.cumul()).toEqual([5, 5, 20]);
+  expect(testU.cumul).toEqual([5, 5, 20]);
   testU.addRound(10);
   testU.addRound(11);
   testU.addRound(12);

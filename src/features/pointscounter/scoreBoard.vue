@@ -1,176 +1,86 @@
 <template>
   <div>
-    <!-- <v-row></v-row> -->
-  <v-card class="ScoreBoard">
-    <v-container class='pa-0'>
-      <v-row no-gutters>
-        <v-col v-for="item in players" :key="item.name" class="pa-0 ma-0">
-          <v-card class outlined>
-            <v-card-title class="py-0" id="playerName">
-              <v-container class="pa-0">
-                <v-row>
-
-              <v-col cols="1" class="pa-0">
-              <v-icon
-                @click="configureBoard='edit'; name=item.name"
-                v-if="configureBoard!='configure'"
-              >mdi-pen</v-icon>
-              </v-col>
-
-               <v-col cols="10" class="pa-0">
-                 <v-row justify="center" class="pa-0">
-
-              {{item.name.toUpperCase()}}
-                 </v-row>
-              </v-col>
-
-              <v-col cols="1" class="pa-0" >
-              <v-icon
-              @click="removePlayer(item.name)"
-              v-if="configureBoard!='configure'" >
-              mdi-delete
-              </v-icon>
-              </v-col>
-                </v-row>
-
-              </v-container>
-            </v-card-title>
-            <v-card-text class="display-2">
-              <v-row justify="center">{{scoreTotal(item.name)}}</v-row>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row v-if="configureBoard=='add' | configureBoard=='edit'">
-        <v-col cols="10">
-          <v-text-field name="new Name" label="new Name" v-model="newName"></v-text-field>
-        </v-col>
-        <v-col cols="2">
-          <v-btn
-            color="success"
-            @click="renamePlayer(name,newName)"
-            v-if="configureBoard=='edit'"
-          >Rename</v-btn>
-          <v-btn color="success"
-          @click="addPlayer(newName)"
-          v-if="configureBoard=='add'">
-          Add
+    <section>
+      <v-card>
+        <h1>Setup</h1>
+        <v-container>
+          <v-btn color="success" @click="addplayer()">
+            <v-icon>mdi-plus-circle</v-icon>
+            Add player
           </v-btn>
-        </v-col>
-      </v-row>
-      <v-row no-gutters>
-        <v-col v-for="item in players" :key="item.name">
-          <score :name="item.name" v-model="players"></score>
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols="4">
-          <v-btn block color="success" @click="AddRound()">
-            <v-icon>mdi-plus-circle-outline</v-icon>
+          <v-btn>
+            <v-icon>mdi-restart-off</v-icon>
+            new game
           </v-btn>
-        </v-col>
-        <v-col cols="4">
-          <v-btn block color="primary" @click="resetScore()" v-if="configureBoard!= 'configure'">
-            <v-icon>mdi-restart</v-icon>
-          </v-btn>
-        </v-col>
-        <v-col cols="4">
-          <v-btn
-            block
-            color="primary"
-            @click=" newName=''; configureBoard=configureBoard=='add'?'configure':'add'"
-          >
-            <v-icon>mdi-account-supervisor</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
+          <v-row v-for="player in playerList" :key="player.id">
+            <v-col>
+              <v-text-field
+                label="nom"
+                v-model="player.nom"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn color="success" @click="removePlayer(player.id)">remove player</v-btn>
+            </v-col>
+            <v-col>
 
-      <v-row justify="center" class="pt-5 hidden-md-and-down" >
-        <v-col cols="12">
-          <v-data-table
-            dense
-            :headers="playerList"
-            :items="playerScores"
-            class="elevation-5"
-            pagination.sync="pagination"
-            sort-by="round"
-            :sort-desc="true"
-
-          ></v-data-table>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </section>
+    <section>
+      <h1>Score</h1>
+      <div>view current score</div>
+      <div>add round</div>
+    </section>
+    <section>
+      <h1>Graph</h1>
+      <div>roundTable</div>
+      <div>editround</div>
+      <div>deleteround</div>
+    </section>
   </div>
 </template>
 
 <script>
-import score from './score.vue';
-import { scoreStore } from './scoreStore';
+import ScoreStore from './scorestore';
 
 export default {
   components: {
-    score,
   },
   data() {
     return {
-      configureBoard: 'configure', // 'configure' or 'add' or 'edit'
-      scoreStoreState: scoreStore.State,
-      players: scoreStore.state.players,
-      playerList: scoreStore.state.playerList,
-      playerScores: scoreStore.state.playerScores,
-      round: scoreStore.state.round,
-      name: '',
-      newName: 'new',
+      nbplayer: 3,
+      scores: [],
     };
   },
+  created() {
+    this.scores = new ScoreStore(['joueur 1', 'joueur 2']);
+  },
   mounted() {
-    scoreStore.initFromCookies();
-    this.refresh();
   },
   methods: {
-    scoreTotal(name) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (this.hasOwnProperty('playerScores')) {
-        const t = this.playerScores.map((x) => x[name]);
-        return t.reduce((a, b) => a + b);
+    addplayer() {
+      this.scores.addPlayer('nouveau joueur');
+    },
+    removePlayer(id) {
+      const { name } = this.playerList.filter((p) => (p.id === id))[0];
+      this.scores.deletePlayer(name);
+    },
+  },
+  computed: {
+    playerList() {
+      const pList = [];
+      for (let index = 0; index < this.scores.playerList.length; index += 1) {
+        pList.push(
+          {
+            nom: this.scores.playerList[index],
+            id: index,
+          },
+        );
       }
-      return 0;
-    },
-    resetScore() {
-      scoreStore.resetScore();
-      this.playerScores = scoreStore.getPlayerScores();
-      this.refresh();
-    },
-    AddRound() {
-      scoreStore.AddRound();
-
-      this.playerScores = scoreStore.getPlayerScores();
-      this.players = scoreStore.getPlayers();
-      this.refresh();
-    },
-    refresh() {
-      this.players = scoreStore.getPlayers();
-      this.playerScores = scoreStore.getPlayerScores();
-      this.playerList = scoreStore.getPlayerList();
-      this.round = scoreStore.getRound();
-    },
-    addPlayer(name) {
-      const pList = this.players.map((x) => x.name);
-      if (!pList.includes(name)) {
-        scoreStore.addPlayer(name);
-        this.refresh();
-      }
-      this.configureBoard = 'configure';
-    },
-    removePlayer(name) {
-      scoreStore.removePlayer(name);
-      this.refresh();
-    },
-    renamePlayer(OldName, newName) {
-      // TODO validation of NewName
-      scoreStore.renamePlayer(OldName, newName);
-      this.configureBoard = 'configure';
+      return pList;
     },
   },
 };
@@ -178,40 +88,5 @@ export default {
 <style lang="scss">
 </style>
 <style lang="scss" scoped>
-.ScoreBoard {
-  position: absolute;
-  top: 20px;
-}
-.negative {
-  color: red;
-}
-.positive {
-  color: green;
-}
-.ScoreTotal {
-  font-weight: bold;
-  margin-top: 20px;
-  color: blue;
-  @media screen and (max-width:600px) and (orientation:landscape ){
-    font-weight:normal;
-
-  }
-}
-@media screen and (max-width:740px) and (orientation:landscape ){
-.v-card__text {
-  padding-bottom: 0px;
-  .row {
-  font-size: 30px;
-  align-content: center;
-  height: 34px;
-
-  }
-}
-}
-@media screen and (max-width:740px) and (orientation:landscape ){
-.container-fluid {
-  padding-top: 0px;
-}
-}
 
 </style>

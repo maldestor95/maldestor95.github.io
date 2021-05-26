@@ -3,9 +3,11 @@ import Player from './scoreuser';
 class ScoreStore {
   constructor(nameListArray) {
     this.store = [];
-    nameListArray.forEach((name) => {
-      this.addPlayer(name);
-    });
+    if (nameListArray.length > 0) {
+      nameListArray.forEach((name) => {
+        this.addPlayer(name);
+      });
+    }
   }
 
   addPlayer(name) {
@@ -25,8 +27,6 @@ class ScoreStore {
   get cumulScores() {
     const cumul = this.store.map((player) => {
       const r = {};
-      // r.name = player.name;
-      // const cumul = player.cumul[player.cumul.length - 1];
       r[player.name] = player.cumul[player.cumul.length - 1];
       return r;
     });
@@ -65,4 +65,4 @@ class ScoreStore {
     return false;
   }
 }
-module.exports = ScoreStore;
+export default ScoreStore;

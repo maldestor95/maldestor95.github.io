@@ -1,7 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
+
 class User {
   constructor(name) {
     this.name = name;
     this.score = [];
+    this.uuid = uuidv4();
   }
 
   round(number) {

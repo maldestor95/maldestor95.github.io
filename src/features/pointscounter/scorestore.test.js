@@ -21,10 +21,10 @@ describe('ScoreStore', () => {
   test('add round', () => {
     const Scores = new ScoreStore(['alpha', 'beta', 'gamma']);
     Scores.addRound([1, 10, 20]);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1] });
+    expect(Scores.player('alpha').score).toEqual([1]);
     Scores.addRound([2, 10, 20]);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2] });
-    expect(Scores.player('gamma')).toEqual({ name: 'gamma', score: [20, 20] });
+    expect(Scores.player('alpha').score).toEqual([1, 2]);
+    expect(Scores.player('gamma').score).toEqual([20, 20]);
   });
   test('delete round', () => {
     const Scores = new ScoreStore(['alpha', 'beta', 'gamma']);
@@ -32,9 +32,9 @@ describe('ScoreStore', () => {
     Scores.addRound([2, 11, 21]);
     Scores.addRound([3, 12, 22]);
     Scores.addRound([4, 13, 23]);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2, 3, 4] });
+    expect(Scores.player('alpha').score).toEqual([1, 2, 3, 4]);
     Scores.deleteRound(2);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2, 4] });
+    expect(Scores.player('alpha').score).toEqual([1, 2, 4]);
   });
   test('edit round', () => {
     const Scores = new ScoreStore(['alpha', 'beta', 'gamma']);
@@ -42,9 +42,9 @@ describe('ScoreStore', () => {
     Scores.addRound([2, 11, 21]);
     Scores.addRound([3, 12, 22]);
     Scores.addRound([4, 13, 23]);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2, 3, 4] });
+    expect(Scores.player('alpha').score).toEqual([1, 2, 3, 4]);
     Scores.editRound(2, [200, 201, 202]);
-    expect(Scores.player('alpha')).toEqual({ name: 'alpha', score: [1, 2, 200, 4] });
+    expect(Scores.player('alpha').score).toEqual([1, 2, 200, 4]);
   });
   test('get cumulative Score', () => {
     const Scores = new ScoreStore(['alpha 1', 'beta 1']);

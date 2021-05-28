@@ -21,7 +21,7 @@ class ScoreStore {
   }
 
   get playerList() {
-    return this.store.map((player) => player.name);
+    return this.store.map((player) => ({ name: player.name, id: player.id }));
   }
 
   get cumulScores() {
@@ -63,6 +63,12 @@ class ScoreStore {
       this.store[playerid].editRound(roundNumber, element);
     }
     return false;
+  }
+
+  resetScores() {
+    for (let playerid = 0; playerid < this.store.length; playerid += 1) {
+      this.store[playerid].resetScore();
+    }
   }
 }
 export default ScoreStore;

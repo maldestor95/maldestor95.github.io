@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 class User {
   constructor(name) {
     this.name = name;
-    this.score = [];
+    this.score = [0];
     this.uuid = uuidv4();
   }
 
@@ -29,6 +29,10 @@ class User {
 
   addRound(score) {
     this.score = [...this.score, score];
+  }
+
+  resetScore() {
+    this.score = [0];
   }
 
   get cumul() {

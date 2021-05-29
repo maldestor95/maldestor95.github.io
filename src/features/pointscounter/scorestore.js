@@ -21,7 +21,7 @@ class ScoreStore {
   }
 
   get playerList() {
-    return this.store.map((player) => ({ name: player.name, id: player.id }));
+    return this.store.map((player) => ({ name: player.name, id: player.uuid }));
   }
 
   get cumulScores() {

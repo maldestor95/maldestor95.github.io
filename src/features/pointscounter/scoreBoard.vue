@@ -1,7 +1,7 @@
 <template>
   <div>
-      <v-icon @click="setup = !setup">mdi-cogs</v-icon>
-      <v-card v-if="setup">
+      <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
+      <v-card v-if="showSetup">
         <h1>Setup</h1>
         <v-container>
           <v-btn color="success" @click="addplayer()">
@@ -15,7 +15,7 @@
           <v-row v-for="player in playerList" :key="player.uuid">
             <v-col>
               <v-text-field
-                label="nom"
+                :label= "'Joueur ' + playerNumber(player.uuid)"
                 v-model="player.name"
               ></v-text-field>
             </v-col>
@@ -28,7 +28,7 @@
           </v-row>
         </v-container>
       </v-card>
-    <v-card v-if=" !setup ">
+    <v-card v-if=" !showSetup ">
       <h1>Score</h1>
       <v-row v-for="player in playerList" :key="player.uuid">
         <v-col>{{player.name}}</v-col>
@@ -94,10 +94,29 @@ export default {
     cRound(uuid) {
       return this.currentRound.filter((round) => (round.id === uuid))[0].round;
     },
+    toggleSetup() {
+      if (this.playerList.length === 0) {
+        this.setup = true;
+        return this.setup;
+      }
+      if (this.currentRound.length === 0) {
+        this.setup = true;
+        return this.setup;
+      }
+      this.setup = !this.setup;
+      return this.setup;
+    },
+    playerNumber(uuid) {
+      const pList = this.scores.store.map((p) => p.uuid);
+      return pList.indexOf(uuid).toString();
+    },
   },
   computed: {
     playerList() {
       return this.scores.store;
+    },
+    showSetup() {
+      return this.setup;
     },
   },
 };

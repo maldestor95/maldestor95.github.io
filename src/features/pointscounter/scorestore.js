@@ -70,5 +70,12 @@ class ScoreStore {
       this.store[playerid].resetScore();
     }
   }
+
+  newGame(prefix) {
+    for (let playerid = 0; playerid < this.store.length; playerid += 1) {
+      this.store[playerid].rename(`${prefix} ${playerid}`);
+    }
+    this.resetScores();
+  }
 }
 export default ScoreStore;

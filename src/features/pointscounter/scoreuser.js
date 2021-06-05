@@ -35,6 +35,10 @@ class User {
     this.score = [0];
   }
 
+  rename(newName) {
+    this.name = newName;
+  }
+
   get cumul() {
     return this.score.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
   }

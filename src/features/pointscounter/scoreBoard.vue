@@ -83,6 +83,7 @@ export default {
       this.scores.deletePlayer(name);
     },
     newGame() {
+      this.scores.newGame('Joueur');
       const round = this.scores.playerList.map((player) => ({ ...player, round: 0 }));
       this.currentRound = [...round];
       this.setup = false;

@@ -47,8 +47,9 @@
         </v-col>
       </v-row>
       <v-btn @click="newRound">new round</v-btn>
-    <section>
-      <h1>Graph</h1>
+    </v-card>
+
+    <v-card v-if=" !showSetup ">
       <div>roundTable</div>
       <v-switch label="Cumul" v-model="cumulativeDisplay"></v-switch>
         <v-simple-table>
@@ -77,19 +78,26 @@
             </tr>
           </tbody>
         </template>
-  </v-simple-table>
+    </v-simple-table>
       <div>editround</div>
       <div>deleteround</div>
-    </section>
+    </v-card>
+
+    <v-card v-if=" !showSetup ">
+      <linechart chartid= "Line Chart"
+        :data="plotData"
+      ></linechart>
     </v-card>
   </div>
 </template>
 
 <script>
 import ScoreStore from './scorestore';
+import linechart from '../../components/plotly/linechart.vue';
 
 export default {
   components: {
+    linechart,
   },
   data() {
     return {
@@ -178,6 +186,18 @@ export default {
     },
     showSetup() {
       return this.setup;
+    },
+    plotData() {
+      const result = [];
+      for (let index = 0; index < this.scores.store.length; index += 1) {
+        const player = this.scores.store[index];
+        result.push({
+          name: player.name,
+          y: player.cumulRound,
+          x: Array.from({ length: player.cumulRound.length }, (v, i) => i),
+        });
+      }
+      return result;
     },
   },
 };

@@ -43,6 +43,10 @@ class User {
     return this.score.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
   }
 
+  get cumulRound() {
+    return this.score.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
+  }
+
   get total() {
     return this.cumul[this.cumul.length - 1];
   }

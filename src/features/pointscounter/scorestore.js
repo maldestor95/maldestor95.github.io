@@ -33,16 +33,20 @@ class ScoreStore {
     return cumul;
   }
 
+  getScore(uuid) {
+    return this.store.filter((pl) => pl.uuid === uuid)[0].total;
+  }
+
   player(name) {
     const result = this.store.filter((pl) => pl.name === name);
     return result[0];
   }
 
   addRound(roundScore) { // roundScore example [{'name1':'score'},{'name2':'score2'}]
-    if (roundScore.length !== this.playerList.length) return null;
+    // if (roundScore.length !== this.playerList.length) return null;
     for (let playerid = 0; playerid < roundScore.length; playerid += 1) {
       const element = roundScore[playerid];
-      this.store[playerid].addRound(element);
+      this.store[playerid].addRound(element.roundData);
     }
     return false;
   }

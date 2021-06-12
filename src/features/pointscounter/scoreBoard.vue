@@ -30,6 +30,7 @@
       </v-card>
     <v-card v-if=" !showSetup ">
       <h1>Score</h1>
+      <p>Round {{roundId}}</p>
       <v-row v-for="player in playerList" :key="player.uuid">
         <v-col>{{player.name}}</v-col>
         <v-col>{{cRound(player.uuid)}}</v-col>
@@ -41,12 +42,42 @@
             <v-btn color="success" @click="updateRound(player.uuid, -5)">-5</v-btn>
             <v-btn color="success" @click="updateRound(player.uuid, -10)">-10</v-btn>
         </v-col>
+        <v-col>
+          Provisoire {{getScores(player.uuid) + cRound(player.uuid)}}
+        </v-col>
       </v-row>
-      <div>view current score</div>
-      <div>add round</div>
+      <v-btn @click="newRound">new round</v-btn>
     <section>
       <h1>Graph</h1>
       <div>roundTable</div>
+      <v-switch label="Cumul" v-model="cumulativeDisplay"></v-switch>
+        <v-simple-table>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">
+                Round
+              </th>
+              <th v-for="pl in playerList" :key="pl.name"
+              class="text-left">
+                {{pl.name}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="rId in roundId"
+              :key="rId"
+            >
+              <td> {{ roundId-rId }}</td>
+              <td v-for="pl in playerList" :key="pl.name"
+                class="text-left">
+                {{playerRoundScore(pl.uuid, roundId-rId+1, cumulativeDisplay)}}
+              </td>
+            </tr>
+          </tbody>
+        </template>
+  </v-simple-table>
       <div>editround</div>
       <div>deleteround</div>
     </section>
@@ -67,6 +98,7 @@ export default {
       scores: [],
       roundId: 0,
       currentRound: [],
+      cumulativeDisplay: true,
     };
   },
   created() {
@@ -87,6 +119,7 @@ export default {
       const round = this.scores.playerList.map((player) => ({ ...player, round: 0 }));
       this.currentRound = [...round];
       this.setup = false;
+      this.roundId = 0;
     },
     updateRound(uuid, value) {
       const uuidRound = this.currentRound.filter((round) => (round.id === uuid))[0];
@@ -110,6 +143,33 @@ export default {
     playerNumber(uuid) {
       const pList = this.scores.store.map((p) => p.uuid);
       return pList.indexOf(uuid).toString();
+    },
+    getScores(uuid) {
+      return this.scores.getScore(uuid);
+    },
+    newRound() {
+      const prepareData = [];
+
+      for (let index = 0; index < this.currentRound.length; index += 1) {
+        prepareData.push(
+          {
+            name: this.currentRound[index].name,
+            roundData: this.currentRound[index].round,
+          },
+        );
+        this.currentRound[index].round = 0;
+      }
+
+      this.scores.addRound(prepareData);
+      this.roundId += 1;
+      return null;
+    },
+    playerRoundScore(uuid, rId, cumul = false) {
+      const playerScores = this.scores.store.filter((pS) => pS.uuid === uuid)[0];
+      if (cumul) {
+        return playerScores.score.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], [])[rId];
+      }
+      return playerScores.score[rId];
     },
   },
   computed: {

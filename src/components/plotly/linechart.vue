@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div :id="chartid">
+    <div >
+        <div :id="chartid" class='plotly'>
         </div>
    </div>
 </template>
@@ -72,8 +72,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#linechart {
-    background-color: pink;
+.plotly {
+    width: 100%;
 }
 
 </style>

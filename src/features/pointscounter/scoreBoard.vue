@@ -1,33 +1,33 @@
 <template>
   <div>
-      <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
-      <v-card v-if="showSetup">
-        <h1>Setup</h1>
-        <v-container>
-          <v-btn color="success" @click="addplayer()">
-            <v-icon>mdi-plus-circle</v-icon>
-            Add player
-          </v-btn>
-          <v-btn color="success" @click="newGame()" v-if="playerList.length>0">
-            <v-icon>mdi-restart-off</v-icon>
-            new game
-          </v-btn>
-          <v-row v-for="player in playerList" :key="player.uuid">
-            <v-col>
-              <v-text-field
-                :label= "'Joueur ' + playerNumber(player.uuid)"
-                v-model="player.name"
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-btn color="success" @click="removePlayer(player.uuid)">remove player</v-btn>
-            </v-col>
-            <v-col>
-              {{ player.total}}
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card>
+    <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
+    <v-card v-if="showSetup">
+      <h1>Setup</h1>
+      <v-container>
+        <v-btn color="success" @click="addplayer()">
+          <v-icon>mdi-plus-circle</v-icon>
+          Add player
+        </v-btn>
+        <v-btn color="success" @click="newGame()" v-if="playerList.length>0">
+          <v-icon>mdi-restart-off</v-icon>
+          new game
+        </v-btn>
+        <v-row v-for="player in playerList" :key="player.uuid">
+          <v-col>
+            <v-text-field
+              :label= "'Joueur ' + playerNumber(player.uuid)"
+              v-model="player.name"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn color="success" @click="removePlayer(player.uuid)">remove player</v-btn>
+          </v-col>
+          <v-col>
+            {{ player.total}}
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
     <v-card v-if=" !showSetup ">
       <h1>Score</h1>
       <p>Round {{roundId}}</p>
@@ -49,11 +49,12 @@
       <v-btn @click="newRound">new round</v-btn>
     </v-card>
 
+    <!-- Table with round score -->
     <v-card v-if=" !showSetup ">
-      <div>roundTable</div>
+      <div>Score history</div>
       <v-switch label="Cumul" v-model="cumulativeDisplay"></v-switch>
-        <v-simple-table>
-        <template v-slot:default>
+        <v-simple-table class='roundTable' height='200px'>
+          <template v-slot:default>
           <thead>
             <tr>
               <th class="text-left">
@@ -79,11 +80,11 @@
           </tbody>
         </template>
     </v-simple-table>
-      <div>editround</div>
-      <div>deleteround</div>
+      <!-- <div>editround</div>
+      <div>deleteround</div> -->
     </v-card>
 
-    <v-card v-if=" !showSetup ">
+    <v-card v-if=" !showSetup && roundId>0">
       <linechart chartid= "Line Chart"
         :data="plotData"
       ></linechart>
@@ -205,5 +206,9 @@ export default {
 <style lang="scss">
 </style>
 <style lang="scss" scoped>
+.roundTable {
+  background-color: red;
+  // max-height: 500px;
+}
 
 </style>

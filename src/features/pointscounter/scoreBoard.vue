@@ -1,32 +1,62 @@
 <template>
   <div>
-    <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
-    <v-card v-if="showSetup">
-      <h1>Setup</h1>
-      <v-container>
-        <v-btn color="success" @click="addplayer()">
-          <v-icon>mdi-plus-circle</v-icon>
-          Add player
-        </v-btn>
-        <v-btn color="success" @click="newGame()" v-if="playerList.length>0">
-          <v-icon>mdi-restart-off</v-icon>
-          new game
-        </v-btn>
-        <v-row v-for="player in playerList" :key="player.uuid">
-          <v-col>
-            <v-text-field
-              :label= "'Joueur ' + playerNumber(player.uuid)"
-              v-model="player.name"
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-btn color="success" @click="removePlayer(player.uuid)">remove player</v-btn>
-          </v-col>
-          <v-col>
-            {{ player.total}}
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-card v-if="showSetup"
+      class="d-flex flex-column">
+      <v-card-title color="primary">
+        <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
+        <h1>Setup</h1>
+      </v-card-title>
+      <v-card-actions>
+        <v-container>
+          <v-row>
+            <v-btn color="success" @click="addplayer()">
+              <v-icon>mdi-plus-circle</v-icon>
+              Add player
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="success" @click="newGame()" :disabled="playerList.length===0">
+              <v-icon>mdi-restart-off</v-icon>
+              new game
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-row>
+        </v-container>
+      </v-card-actions>
+      <v-card-text fluid>
+            <v-container fluid>
+              <v-row class="d-none d-sm-flex">
+                <v-col  cols="1" sm="2"
+                class="ml-n6 ml-sm-0 mr-8 mr-sm-n16"
+                >
+                  action
+                </v-col>
+                <v-col sm="9">
+                  Name
+                </v-col>
+                <v-col cols="1" >
+                  Score
+                </v-col>
+              </v-row>
+              <v-row v-for="player in playerList" :key="player.uuid"
+              dense
+              >
+                <v-col cols="1" sm="2" class="mt-5 ml-n6 ml-sm-0 mr-11 mr-sm-n16">
+                  <v-btn color="success" small >
+                    <v-icon @click="removePlayer(player.uuid)">mdi-delete-circle</v-icon>
+                  </v-btn>
+                </v-col>
+                <v-col cols="10" sm="9" >
+                  <v-text-field
+                    :label= "'Joueur ' + playerNumber(player.uuid)"
+                    v-model="player.name"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="1" sm="1" class="mt-5 d-none d-sm-inline text-center">
+                  {{ player.total}}
+                </v-col>
+              </v-row>
+            </v-container>
+      </v-card-text>
     </v-card>
     <v-card v-if=" !showSetup ">
       <h1>Score</h1>
@@ -209,6 +239,9 @@ export default {
 .roundTable {
   background-color: red;
   // max-height: 500px;
+}
+.title {
+  text-align: center;
 }
 
 </style>

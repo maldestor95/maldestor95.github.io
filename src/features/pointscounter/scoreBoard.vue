@@ -72,10 +72,12 @@
               <v-col class=" editRoundScore">Round </v-col>
               <v-col class=" editRoundScore">Score</v-col>
             </v-row>
-          <div v-for="player in playerList" :key="player.uuid">
-            <v-row >
+          <div v-for="player in playerList" :key="player.uuid"
+          :class="{ focusEditRound: playerRoundEditable(player.uuid)}"
+          >
+            <v-row @click="currentPlayer=player.uuid">
               <v-col>{{player.name}}</v-col>
-              <v-col @click="currentPlayer=player.uuid"
+              <v-col
               class=" editRoundScore"
               >
               {{cRound(player.uuid)}}
@@ -302,5 +304,13 @@ h1, h2 {
 }
 .editRoundScore {
   text-align: center;
+}
+.focusEditRound {
+  background-color: #1976D2;
+  border: 1px ridge black;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+
 }
 </style>

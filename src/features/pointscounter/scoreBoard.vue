@@ -296,8 +296,8 @@ export default {
 </style>
 <style lang="scss" scoped>
 .roundTable {
-  background-color: red;
-  // max-height: 500px;
+  // background-color: red;
+  max-height: 500px;
 }
 h1, h2 {
   text-align: center;

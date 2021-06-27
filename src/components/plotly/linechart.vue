@@ -42,6 +42,11 @@ export default {
         yaxis: {
           autorange: true,
         },
+        margin: {
+          l: 30,
+          r: 30,
+          t: 40,
+        },
       },
       options: {
         scrollZoom: true,

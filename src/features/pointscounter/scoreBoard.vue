@@ -64,10 +64,10 @@
       </v-col>
       <!-- Round -->
       <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="4">
-        <v-card  max-width="600px" class="px-2" >
+        <v-card  min-width="220px" max-width="600px" class="px-2" >
           <h1>Score</h1>
           <h2>Round {{roundId}}</h2>
-          <v-row >
+          <v-row @click="currentPlayer = 0">
               <v-col>name</v-col>
               <v-col class=" editRoundScore">Round </v-col>
               <v-col class=" editRoundScore">Score</v-col>
@@ -87,7 +87,7 @@
               </v-col>
             </v-row>
             <v-row v-show="playerRoundEditable(player.uuid)"
-            class="pb-4">
+            class="pb-6">
               <v-spacer></v-spacer>
               <v-btn :small="displaySmallDevice" color="green lighten-4"
                 @click="updateRound(player.uuid, 10)">
@@ -105,20 +105,21 @@
 
             </v-row>
             <v-row v-show="playerRoundEditable(player.uuid)"
-            class="pb-4">
+            class="pb-6">
                 <v-spacer></v-spacer>
                 <v-btn :small="displaySmallDevice" color="red lighten-4"
-                @click="updateRound(player.uuid, -1)">
-                -1</v-btn>
+                @click="updateRound(player.uuid, -10)">
+                -10</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn :small="displaySmallDevice" color="red lighten-4"
                 @click="updateRound(player.uuid, -5)">
                 -5</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn :small="displaySmallDevice" color="red lighten-4"
-                @click="updateRound(player.uuid, -10)">
-                -10</v-btn>
+                @click="updateRound(player.uuid, -1)">
+                -1</v-btn>
                 <v-spacer></v-spacer>
+
             </v-row>
           </div>
           <v-row class="mt-5 pb-4 justify-center">
@@ -197,6 +198,8 @@ export default {
     this.scores = new ScoreStore([]);
   },
   mounted() {
+    const t = JSON.parse(localStorage.getItem('scores')) || [];
+    this.scores = new ScoreStore(t);
   },
   methods: {
     addplayer(name) {
@@ -254,6 +257,7 @@ export default {
 
       this.scores.addRound(prepareData);
       this.roundId += 1;
+      localStorage.setItem('scores', JSON.stringify(this.scores));
       return null;
     },
     playerRoundScore(uuid, rId, cumul = false) {
@@ -311,6 +315,6 @@ h1, h2 {
   border-radius: 10px;
   padding: 10px;
   color: white;
-
+  margin : 10px 0px 10px 0px;
 }
 </style>

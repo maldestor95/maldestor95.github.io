@@ -38,7 +38,7 @@ export default {
   },
 
   data: () => ({
-    menu: 'plotly',
+    menu: 'scoreBoard',
     menulist: [
       { title: 'home' },
       { title: 'recette' },

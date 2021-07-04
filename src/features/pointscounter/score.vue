@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { scoreStore } from './scoreStore';
+import ScoreStore from './scorestore';
 
 export default {
   props: {
@@ -51,7 +51,7 @@ export default {
     },
 
     updateScore(newValue = 0) {
-      scoreStore.updateRound({ score: newValue, name: this.name });
+      ScoreStore.updateRound({ score: newValue, name: this.name });
       // this.value=scoreStore.getPlayer()
     },
   },

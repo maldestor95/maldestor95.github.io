@@ -75,7 +75,7 @@
           <div v-for="player in playerList" :key="player.uuid"
           :class="{ focusEditRound: playerRoundEditable(player.uuid)}"
           >
-            <v-row @click="currentPlayer=player.uuid">
+            <v-row @click="currentPlayer=player.uuid" class="zoom">
               <v-col>{{player.name}}</v-col>
               <v-col
               class=" editRoundScore"
@@ -316,5 +316,16 @@ h1, h2 {
   padding: 10px;
   color: white;
   margin : 10px 0px 10px 0px;
+}
+
+.zoom {
+  transition-property: font-size;
+  transition-duration: 0.4s;
+  transition-delay: 0.1s;
+}
+
+.zoom:hover {
+  font-size: 36px;
+  cursor: pointer;
 }
 </style>

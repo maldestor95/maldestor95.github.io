@@ -1,15 +1,17 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-        <div class="d-flex align-center">
+        <div class="navBarText"
+          @click="menu='home'"
+        >
             Maldestor95
         </div>
         <v-spacer></v-spacer>
-        <mainMenu v-model='menulist' @choice="menu=$event"/>
+        <mainMenu v-model='menulist' @choice="menu=$event" />
     </v-app-bar>
 
     <v-main>
-        <listApp v-if="menu==='home'"/>
+        <listApp v-if="menu==='home'" @changeMenu="menu=$event" />
         <recetteApp v-if="menu==='recette'"/>
         <devWiki v-if="menu==='dev Wiki'"/>
         <plotly v-if="menu==='plotly'"/>
@@ -35,7 +37,7 @@ export default {
   },
 
   data: () => ({
-    menu: 'plotly',
+    menu: 'home',
     menulist: [
       { title: 'home' },
       { title: 'recette' },
@@ -45,3 +47,30 @@ export default {
   }),
 };
 </script>
+<style lang="css">
+  .navBarText {
+    position: fixed;
+    left: 30px;
+    color:white;
+  }
+  .navBarText:hover {
+    /* border: white 1px solid;
+    border-radius: 10px; */
+    font-weight: bold;
+    padding: 10px;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+  0% {
+    left: 30px;
+  }
+  50% {
+    left: 40px;
+    font-size: 1.3rem;
+  }
+  100% {
+    left: 30px;
+  }
+}
+</style>

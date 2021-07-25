@@ -6,7 +6,7 @@
            :src="require('../../public/noun_cogs_170064.svg')"
           class="my-3"
           contain
-          height="400"
+          height="100"
         />
       </v-col>
 
@@ -28,20 +28,31 @@
           Pages
         </h2>
 
-        <v-row justify="center">
-          <div
+        <v-row justify="center"
             v-for="(eco, i) in ecosystem"
             :key="i"
           >
-            <a
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank">
-              {{ eco.text }}
-            </a>
+            <div v-if="eco.menu ==='' ">
+              <a
+              :href="eco.href"
+              class="subheading mx-3"
+              target="_blank">
+                {{ eco.text }}
+              </a>
+            </div>
+            <div v-else>
+              <a
+
+              class="subheading mx-3"
+              target="_blank"
+              @click="$emit('changeMenu', eco.menu)"
+              >
+                {{ eco.text }}
+              </a>
+            </div>
             {{ eco.desc }}
-              <v-icon @click="githubclick(eco.github) ">mdi-github</v-icon>
-          </div>
+              <v-icon @click="githubclick(eco.github)" v-if="eco.github"
+              >mdi-github</v-icon>
         </v-row>
       </v-col>
     </v-row>
@@ -59,6 +70,33 @@ export default {
         desc: 'VueJs template for personal github pages ',
         href: 'https://maldestor95.github.io/lisy',
         github: 'https://github.com/maldestor95/lisy',
+        menu: '',
+      },
+      {
+        text: 'Recette',
+        desc: 'Petit recueil de recettes ',
+        href: '',
+        github: 'https://github.com/maldestor95/recipebook',
+        menu: 'recette',
+      },
+      {
+        text: 'Score Board',
+        desc: 'Applet de calcul de points',
+        href: '',
+        menu: 'scoreboard',
+      },
+      {
+        text: 'Development Wiki',
+        desc: 'Applet de calcul de points',
+        href: '',
+        github: 'https://github.com/maldestor95/dev-wiki',
+        menu: 'dev Wiki',
+      },
+      {
+        text: 'Plotly Demo',
+        desc: 'Démos de graphiques crée avec plotly',
+        href: '',
+        menu: 'plotly',
       },
     ],
   }),

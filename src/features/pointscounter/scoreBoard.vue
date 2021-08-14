@@ -63,7 +63,7 @@
         </v-card>
       </v-col>
       <!-- Round -->
-      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="4">
+      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="6">
         <v-card  min-width="220px" max-width="600px" class="px-2" >
           <h1>Score</h1>
           <h2>Round {{roundId}}</h2>
@@ -128,48 +128,50 @@
         </v-card>
       </v-col >
       <!-- Table with round score -->
-      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="4">
-      <v-card >
-        <h1>Score history</h1>
-        <v-switch label="Cumul" v-model="cumulativeDisplay"></v-switch>
-          <v-simple-table class='roundTable' height='200px'>
-            <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  Round
-                </th>
-                <th v-for="pl in playerList" :key="pl.name"
-                class="text-left">
-                  {{pl.name}}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="rId in roundId"
-                :key="rId"
-              >
-                <td> {{ roundId-rId }}</td>
-                <td v-for="pl in playerList" :key="pl.name"
-                  class="text-left">
-                  {{playerRoundScore(pl.uuid, roundId-rId+1, cumulativeDisplay)}}
-                </td>
-              </tr>
-            </tbody>
-          </template>
-      </v-simple-table>
-        <!-- <div>editround</div>
-        <div>deleteround</div> -->
-      </v-card>
-    </v-col>
-    <!-- chart -->
-    <v-col v-if=" !showSetup && roundId>0" class="px-0 px-sm-4" cols="12" sm="4">
-      <v-card >
-        <linechart chartid= "Score Chart"
-          :data="plotData"
-        ></linechart>
-      </v-card>
+      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="6">
+        <v-card>
+          <h1>Score history</h1>
+          <v-radio-group v-model="displayScore" row >
+            <v-radio label="cumul" value="cumul"></v-radio>
+            <v-radio label="round" value="round"></v-radio>
+            <v-radio v-if="roundId>0"
+              label="chart" value="chart"></v-radio>
+          </v-radio-group>
+          <div v-if="displayScore!='chart'">
+              <v-simple-table class='roundTable' height='200px'>
+                <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-left">
+                      Round
+                    </th>
+                    <th v-for="pl in playerList" :key="pl.name"
+                    class="text-left">
+                      {{pl.name}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="rId in roundId"
+                    :key="rId"
+                  >
+                    <td> {{ roundId-rId }}</td>
+                    <td v-for="pl in playerList" :key="pl.name"
+                      class="text-left">
+                      {{playerRoundScore(pl.uuid, roundId-rId+1, displayScore==="cumul")}}
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </div>
+            <div v-if="displayScore==='chart'">
+              <linechart chartid= "Score Chart"
+                  :data="plotData"
+                ></linechart>
+            </div>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -192,6 +194,7 @@ export default {
       currentRound: [],
       cumulativeDisplay: true,
       currentPlayer: 0,
+      displayScore: 'cumul',
     };
   },
   created() {

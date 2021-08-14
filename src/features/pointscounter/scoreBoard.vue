@@ -1,6 +1,7 @@
 <template>
   <v-container >
     <v-icon @click="toggleSetup()">mdi-cogs</v-icon>
+    <!-- {{$vuetify.breakpoint.name}} -->
     <v-row fluid>
       <!-- Setup -->
       <v-col v-if="showSetup" >
@@ -63,8 +64,8 @@
         </v-card>
       </v-col>
       <!-- Round -->
-      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="6">
-        <v-card  min-width="220px" max-width="600px" class="px-2" >
+      <v-col v-if=" !showSetup " class="px-0 px-sm-2" cols="12">
+        <v-card  class="px-2" >
           <h1>Score</h1>
           <h2>Round {{roundId}}</h2>
           <v-row @click="currentPlayer = 0">
@@ -128,7 +129,7 @@
         </v-card>
       </v-col >
       <!-- Table with round score -->
-      <v-col v-if=" !showSetup " class="px-0 px-sm-4" cols="12" sm="6">
+      <v-col v-if=" !showSetup " class="px-0 px-sm-2" cols="12" >
         <v-card>
           <h1>Score history</h1>
           <v-radio-group v-model="displayScore" row >

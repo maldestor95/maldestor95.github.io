@@ -77,7 +77,7 @@ class ScoreStore {
 
   newGame(prefix) {
     for (let playerid = 0; playerid < this.store.length; playerid += 1) {
-      if (this.store[playerid].name === undefined) { this.store[playerid].rename(`${prefix} ${playerid}`); }
+      if (this.store[playerid].name === undefined) { this.store[playerid].rename(`${prefix}${playerid}`); }
     }
     this.resetScores();
   }

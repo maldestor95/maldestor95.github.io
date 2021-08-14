@@ -51,7 +51,7 @@
                     </v-col>
                     <v-col cols="10" sm="9" >
                       <v-text-field
-                        :label= "'Joueur ' + playerNumber(player.uuid)"
+                        :label= "'Joueur' + playerNumber(player.uuid)"
                         v-model="player.name"
                       ></v-text-field>
                     </v-col>
@@ -323,13 +323,6 @@ h1, h2 {
 }
 
 .zoom {
-  transition-property: font-size;
-  transition-duration: 0.4s;
-  transition-delay: 0.1s;
-}
-
-.zoom:hover {
-  font-size: 36px;
-  cursor: pointer;
+  font-size: 24px;
 }
 </style>

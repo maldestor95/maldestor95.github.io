@@ -19,3 +19,7 @@ deploy.sh
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Version
+### 0.2.0
+ * refresh page managed on counter application

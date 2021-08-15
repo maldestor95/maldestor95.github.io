@@ -22,6 +22,11 @@
                   <v-icon>mdi-restart-off</v-icon>
                   new
                 </v-btn>
+                <!-- TODO continue button-->
+                <v-btn color="success" @click="toggleSetup()" :disabled="roundId==0">
+                  <v-icon>mdi-play</v-icon>
+                  Continue
+                </v-btn>
                 <v-spacer></v-spacer>
               </v-row>
             </v-container>
@@ -205,6 +210,7 @@ export default {
   mounted() {
     if (localStorage.scores) {
       this.scores.reinit(localStorage.scores);
+      this.roundId = Number(localStorage.scoresRoundId);
     }
   },
   methods: {
@@ -266,6 +272,8 @@ export default {
       this.scores.addRound(prepareData);
       this.roundId += 1;
       localStorage.setItem('scores', JSON.stringify(this.scores));
+      localStorage.scoresRoundId = this.roundId;
+      localStorage.scoresSetup = this.setup;
       return null;
     },
     playerRoundScore(uuid, rId, cumul = false) {

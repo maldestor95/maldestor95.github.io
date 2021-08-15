@@ -38,7 +38,7 @@ export default {
   },
 
   data: () => ({
-    menu: 'scoreBoard',
+    menu: 'home',
     menulist: [
       { title: 'home' },
       { title: 'recette' },
@@ -47,5 +47,13 @@ export default {
       { title: 'plotly' },
     ],
   }),
+  mounted() {
+    if (localStorage.menu) this.menu = localStorage.menu;
+  },
+  watch: {
+    menu(newValue) {
+      localStorage.menu = newValue;
+    },
+  },
 };
 </script>

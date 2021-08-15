@@ -14,6 +14,7 @@
         <listApp v-if="menu==='home'" @changeMenu="menu=$event" />
         <recetteApp v-if="menu==='recette'"/>
         <devWiki v-if="menu==='dev Wiki'"/>
+        <scoreBoard v-if="menu==='scoreBoard'"/>
         <plotly v-if="menu==='plotly'"/>
     </v-main>
 </v-app>
@@ -24,6 +25,7 @@ import mainMenu from './components/menu.vue';
 import listApp from './components/listapp.vue';
 import recetteApp from './features/recette/recettepage.vue';
 import devWiki from './features/devwiki/devwiki.vue';
+import scoreBoard from './features/pointscounter/scoreBoard.vue';
 import plotly from './features/plotly/plotly.vue';
 
 export default {
@@ -33,6 +35,7 @@ export default {
     listApp,
     recetteApp,
     devWiki,
+    scoreBoard,
     plotly,
   },
 
@@ -42,9 +45,18 @@ export default {
       { title: 'home' },
       { title: 'recette' },
       { title: 'dev Wiki' },
+      { title: 'scoreBoard' },
       { title: 'plotly' },
     ],
   }),
+  mounted() {
+    if (localStorage.menu) this.menu = localStorage.menu;
+  },
+  watch: {
+    menu(newValue) {
+      localStorage.menu = newValue;
+    },
+  },
 };
 </script>
 <style lang="css">

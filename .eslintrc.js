@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true,
   },
   extends: [
     'plugin:vue/essential',
@@ -16,7 +17,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'vue',
+    'vue', 'jest',
   ],
   rules: {
     'linebreak-style': 'off',
@@ -24,5 +25,11 @@ module.exports = {
       js: 'never',
       vue: 'never',
     }],
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
+    // 'except-parens': '',
   },
 };

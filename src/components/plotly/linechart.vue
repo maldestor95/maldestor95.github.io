@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div :id="chartid">
+    <div >
+        <div :id="chartid" class='plotly'>
         </div>
    </div>
 </template>
@@ -42,6 +42,11 @@ export default {
         yaxis: {
           autorange: true,
         },
+        margin: {
+          l: 30,
+          r: 30,
+          t: 40,
+        },
       },
       options: {
         scrollZoom: true,
@@ -72,8 +77,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#linechart {
-    background-color: pink;
+.plotly {
+    width: 100%;
 }
 
 </style>

@@ -10,6 +10,17 @@ class ScoreStore {
     }
   }
 
+  reinit(storageData) {
+    this.store = [];
+    const inputData = JSON.parse(storageData).store;
+    inputData.forEach((pl) => {
+      const newPlayer = new Player(pl.name);
+      newPlayer.score = JSON.parse(JSON.stringify(pl.score));
+      newPlayer.uuid = JSON.parse(JSON.stringify(pl.uuid));
+      this.store.push(newPlayer);
+    });
+  }
+
   addPlayer(name) {
     const player = new Player(name);
     this.store.push(player);

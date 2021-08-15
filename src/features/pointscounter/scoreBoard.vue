@@ -196,14 +196,16 @@ export default {
       cumulativeDisplay: true,
       currentPlayer: 0,
       displayScore: 'cumul',
+      tempscore: [],
     };
   },
   created() {
     this.scores = new ScoreStore([]);
   },
   mounted() {
-    const t = JSON.parse(localStorage.getItem('scores')) || [];
-    this.scores = new ScoreStore(t);
+    if (localStorage.scores) {
+      this.scores.reinit(localStorage.scores);
+    }
   },
   methods: {
     addplayer(name) {
@@ -233,7 +235,9 @@ export default {
         return this.setup;
       }
       if (this.currentRound.length === 0) {
-        this.setup = true;
+        const round = this.scores.playerList.map((player) => ({ ...player, round: 0 }));
+        this.currentRound = [...round];
+        this.setup = false;
         return this.setup;
       }
       this.setup = !this.setup;

@@ -1,25 +1,12 @@
-# Personal page https://maldestor95.github.io/
+# Maldestor95 Landing Page
 
-Template repository for static vuejs app
-## Project setup
-```
-npm install
-```
+Live version: https://maldestor95.github.io
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# Development
+## How to publish
+execute in CLI, on a master branch
+* `npm run build`
+* `deploy.bat`
 
-### Compiles and minifies for production
 
-```
-deploy.sh
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Version
-### 0.2.0
- * refresh page managed on counter application
+## link to libraries

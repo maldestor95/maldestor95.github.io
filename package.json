@@ -1,62 +1,32 @@
 {
-  "name": "maldestor95.github.io",
-  "version": "0.2.0",
+  "name": "maldestor95",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://github.com/maldestor95",
+  "description": "Maldestor95 landing page",
+  "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "vue-cli-service build & deploy.bat",
-    "test": "jest"
+    "dev": "vite --host",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "js-yaml": "^4.1.0",
-    "marked": "^2.0.3",
-    "plotly.js-dist": "^1.58.4",
-    "uuid": "^8.3.2",
-    "vue": "^2.6.11",
-    "vuetify": "^2.4.0"
+    "markdown-it": "^13.0.1",
+    "pinia": "^2.1.7",
+    "uuid": "^9.0.1",
+    "vue": "^3.4.5",
+    "yaml": "^2.3.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.0",
-    "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-service": "^4.1.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.25.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-vue": "^7.9.0",
-    "jest": "^26.6.3",
-    "sass": "^1.32.0",
-    "sass-loader": "^10.0.0",
-    "vue-cli-plugin-vuetify": "^2.3.1",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "jest": {
-    "testMatch": [
-      "**/src/**/*.test.js"
-    ]
+    "@types/markdown-it": "^12.2.3",
+    "@types/uuid": "^9.0.8",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vue-tsc": "^1.8.5"
   }
 }

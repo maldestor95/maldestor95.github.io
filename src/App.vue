@@ -1,88 +1,57 @@
-<template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-        <div class="navBarText"
-          @click="menu='home'"
-        >
-            Maldestor95
-        </div>
-        <v-spacer></v-spacer>
-        <mainMenu v-model='menulist' @choice="menu=$event" />
-    </v-app-bar>
+<script setup lang="ts">
+import card from "./components/card.vue";
+const links = [
+  {
+    url: "https://maldestor95.github.io/score/",
+    name: "Score Board",
+  },
+  {
+    url: "https://maldestor95.github.io/recipeweb/",
+    name: "Recette",
+  },
+  {
+    url: "https://maldestor95.github.io/dorf/",
+    name: "Dorf Romantik",
+  },
+];
+</script>
 
-    <v-main>
-        <listApp v-if="menu==='home'" @changeMenu="menu=$event" />
-        <recetteApp v-if="menu==='recette'"/>
-        <devWiki v-if="menu==='dev Wiki'"/>
-        <scoreBoard v-if="menu==='scoreBoard'"/>
-        <plotly v-if="menu==='plotly'"/>
-    </v-main>
-</v-app>
+<template>
+  <div class="absolute top-0 min-h-screen min-w-full">
+    <div class="relative background mx-auto"></div>
+  </div>
+  <card
+    v-for="item in links"
+    :url="item.url"
+    :target-blank="true"
+    class="relative z-50 w-80"
+  >
+    {{ item.name }}
+  </card>
 </template>
 
-<script>
-import mainMenu from './components/menu.vue';
-import listApp from './components/listapp.vue';
-import recetteApp from './features/recette/recettepage.vue';
-import devWiki from './features/devwiki/devwiki.vue';
-import scoreBoard from './features/pointscounter/scoreBoard.vue';
-import plotly from './features/plotly/plotly.vue';
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
 
-export default {
-  name: 'App',
-  components: {
-    mainMenu,
-    listApp,
-    recetteApp,
-    devWiki,
-    scoreBoard,
-    plotly,
-  },
-
-  data: () => ({
-    menu: 'home',
-    menulist: [
-      { title: 'home' },
-      { title: 'recette' },
-      { title: 'dev Wiki' },
-      { title: 'scoreBoard' },
-      { title: 'plotly' },
-    ],
-  }),
-  mounted() {
-    if (localStorage.menu) this.menu = localStorage.menu;
-  },
-  watch: {
-    menu(newValue) {
-      localStorage.menu = newValue;
-    },
-  },
-};
-</script>
-<style lang="css">
-  .navBarText {
-    position: fixed;
-    left: 30px;
-    color:white;
-  }
-  .navBarText:hover {
-    /* border: white 1px solid;
-    border-radius: 10px; */
-    font-weight: bold;
-    padding: 10px;
-    animation: pulse 1s infinite;
-  }
-
-  @keyframes pulse {
-  0% {
-    left: 30px;
-  }
-  50% {
-    left: 40px;
-    font-size: 1.3rem;
-  }
-  100% {
-    left: 30px;
-  }
+.background {
+  height: 100vh;
+  @apply bg-red-400 mx-auto;
+  /* @apply md:bg-[length:200px_100px]; */
+  @apply bg-cover;
+  /* background-size: 180%; */
+  background-image: url("../public/backgroundRobot.png");
+  background-repeat: repeat-y;
+  background-position: top;
 }
 </style>

@@ -1,10 +1,10 @@
 {
   "name": "maldestor95",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.3.0",
   "type": "module",
   "homepage": "https://github.com/maldestor95",
-  "description": "Maldestor95 landing page",
+  "description": "Maldestor95 Landing Page",
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",

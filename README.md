@@ -1,7 +1,6 @@
-# Score Application
-ScoreBoard  application created in Vue
+# Maldestor95 Landing Page
 
-Live version: https://maldestor95.github.io/score
+Live version: https://maldestor95.github.io
 
 # Development
 ## How to publish
@@ -11,7 +10,3 @@ execute in CLI, on a master branch
 
 
 ## link to libraries
-* chartjs
-  * https://vue-chartjs.org/guide/
-  * https://www.chartjs.org/docs/latest/
-* 
